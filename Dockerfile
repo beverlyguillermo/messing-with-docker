@@ -6,7 +6,19 @@ RUN yum localinstall -y http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-
 RUN yum install -y epel-release
 RUN yum -y update
 RUN yum groupinstall -y "development"
-RUN yum -y install postgresql94-devel libpqxx-devel libcurl-devel libyaml-devel readline-devel zlib-devel libffi-devel openssl-devel sqlite-devel
+
+# For postgres
+RUN yum -y install postgresql94-devel libpqxx-devel
+
+# For other rails stuff
+RUN yum -y install libxml2-devel libxslt1-devel libcurl-devel libyaml-devel readline-devel zlib-devel libffi-devel openssl-devel sqlite-devel
+
+# For capybara-webkit
+RUN yum -y install qtwebkit-devel xvfb
+
+# For a JS runtime
+RUN yum -y install nodejs
+
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN \curl -sSL https://get.rvm.io | bash -s stable
 RUN /usr/local/rvm/bin/rvm install ruby-2.2.3

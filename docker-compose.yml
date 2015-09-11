@@ -10,14 +10,14 @@ redis:
 
 sidekiq:
   build: .
-  command: bash -l -c 'rvm use ruby-2.2.3 && bundle exec sidekiq'
+  command: bash -l -c 'rvm use ruby-2.2.3 && bundle install && bundle exec sidekiq'
   links:
     - db
     - redis
 
 web:
   build: .
-  command: bash -l -c 'rvm use ruby-2.2.3 && bundle exec rails s -b 0.0.0.0'
+  command: bash -l -c 'rvm use ruby-2.2.3 && bundle install && bundle exec rails s -b 0.0.0.0'
   volumes:
     - .:/myapp
   ports:
